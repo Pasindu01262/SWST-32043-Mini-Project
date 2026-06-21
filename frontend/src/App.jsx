@@ -8,7 +8,7 @@ function App() {
     fetch('http://localhost:5000/api/status')
       .then((res) => res.json())
       .then((data) => setMessage(data.message))
-      .catch((error) => setMessage("Backend connection failed! ❌"));
+      .catch((error) => setMessage("Backend connection failed! "));
   }, []);
 
   return (
