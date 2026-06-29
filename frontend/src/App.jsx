@@ -4,6 +4,15 @@ import AdminLayout from './layouts/AdminLayout';
 import Lecturers from './pages/admin/Lecturers';
 
 function App() {
+  const [message, setMessage] = useState("Loading backend status...");
+
+  useEffect(() => {
+    fetch('http://localhost:5000/api/status')
+      .then((res) => res.json())
+      .then((data) => setMessage(data.message))
+      .catch((error) => setMessage("Backend connection failed! ❌"));
+  }, []);
+
   return (
 <BrowserRouter>
       <Routes>
