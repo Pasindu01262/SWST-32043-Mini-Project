@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
+const lecturerRoutes = require('./routes/lecturerRoutes');
+
 
 dotenv.config();
 connectDB(); // Connecting to MongoDB
@@ -9,6 +11,7 @@ connectDB(); // Connecting to MongoDB
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use('/api/lecturers', lecturerRoutes);
 
 // Test API for communicating with the frontend
 app.get('/api/status', (req, res) => {
