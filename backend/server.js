@@ -7,6 +7,8 @@ const lecturerRoutes = require('./routes/lecturerRoutes');
 
 const courseRouter = require('./routes/courseRoutes');
 
+const courseRouter = require('./routes/courseRoutes');
+
 dotenv.config();
 connectDB(); // Connecting to MongoDB
 
