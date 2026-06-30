@@ -1,0 +1,48 @@
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.button_row{
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+}
+
+.action_btn{
+    background:#173253;
+    color:white;
+    border:none;
+    padding:14px 28px;
+    border-radius:40px;
+    font-size:15px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.action_btn:hover{
+    background:#21446f;
+}
+
+.serach_box{
+    display:flex;
+    align-items:center;
+    border:1px solid #173253;
+    border-radius:40px;
+    padding:0 18px;
+    width:380px;
+    height:50px;
+}
+
+.serach_box input{
+    border:none;
+    outline:none;
+    width:100%;
+    font-size:15px;
+}
+
+.serch-box input::placeholder{
+
+    color:#777;
+
+}
