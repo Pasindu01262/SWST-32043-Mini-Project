@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AdminLayout from './layouts/AdminLayout';
 import Lecturers from './pages/admin/Lecturers';
+import AddStudent from './pages/admin/AddStudent';
 
 function App() {
   const [message, setMessage] = useState("Loading backend status...");
@@ -27,6 +28,8 @@ function App() {
         
         {/*Lecturer Route */}
         <Route path="/admin/lecturers" element={<Lecturers />} />
+
+        <Route path="/admin/students" element={<AddStudent />} />
 
       </Routes>
     </BrowserRouter>

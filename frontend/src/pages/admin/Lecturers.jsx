@@ -102,26 +102,26 @@ const Lecturers = () => {
           <form className="lecturer-form" onSubmit={handleSubmit}>
             <div className="form-group">
               <label>Name</label>
-              <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="e.g. Dr. Kasun Perera" required />
+              <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Dr. Kasun Perera" required />
             </div>
             <div className="form-group">
               <label>Email</label>
-              <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="e.g. k.perera@university.ac" required />
+              <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="k.perera@university.ac" required />
             </div>
             <div className="form-group">
               <label>Phone number</label>
-              <input type="text" name="phone" value={formData.phone} onChange={handleChange} placeholder="e.g. 0712345678" required />
+              <input type="text" name="phone" value={formData.phone} onChange={handleChange} placeholder="0712345678" required />
             </div>
             <div className="form-group">
               <label>Department</label>
-              <input type="text" name="department" value={formData.department} onChange={handleChange} placeholder="e.g. Computer Engineering" required />
+              <input type="text" name="department" value={formData.department} onChange={handleChange} placeholder="Computer Engineering" required />
             </div>
 
            {/* Button color and text change when in edit mode */}
             <button 
               type="submit" 
               className="submit-btn" 
-              style={{ backgroundColor: editingId ? '#2563eb' : '#0f172a' }}
+              style={{ backgroundColor: editingId ? '#142243' : '#142243' }}
             >
               {editingId ? 'Update Details' : '+ Add Lecturer'}
             </button>

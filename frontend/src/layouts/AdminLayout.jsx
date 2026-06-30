@@ -38,7 +38,7 @@ const AdminLayout = ({ children, pageTitle }) => {
           <Link to="/admin/results" className={isActive('/admin/results')}>
             <FileText size={20} /> <span>Results</span>
           </Link>
-          <Link to="/admin/register-student" className={isActive('/admin/register-student')}>
+          <Link to="/admin/students" className={isActive('/admin/register-student')}>
             <UserPlus size={20} /> <span>Register Student</span>
           </Link>
         </nav>
