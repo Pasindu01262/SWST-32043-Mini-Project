@@ -38,15 +38,15 @@ const getAllCourses = async (req, res) => {
 
 const updateCourse = async (req, res) => {
     try {
-        const {courseCode, academicYear, semester} = req.params;
-        const course = await Course.findOne({ courseCode: courseCode, academicYear: academicYear, semester: semester });
+        const id = req.params.id;
+        const course = await Course.findOne({ _id: id });
 
         if(course == null) {
             return res.status(404).json({ message: 'Course not found' });
         }
 
-        await Course.findOneAndUpdate({courseCode: courseCode, academicYear: academicYear, semester: semester}, req.body);
-        
+        await Course.findOneAndUpdate({ _id: id }, req.body);
+
         res.status(200).json({ message: 'Course updated successfully' });
 
     } catch (error) {
@@ -56,25 +56,25 @@ const updateCourse = async (req, res) => {
 
 const deleteCourse = async (req, res) => {
     try {
-        const {courseCode, academicYear, semester} = req.params;
-        const course = await Course.findOne({ courseCode: courseCode, academicYear: academicYear, semester: semester });
+        const id = req.params.id;
+        const course = await Course.findOne({ _id: id });
 
         if(course == null) {
             return res.status(404).json({ message: 'Course not found' });
         }
 
-        await Course.findOneAndDelete({courseCode: courseCode, academicYear: academicYear, semester: semester});
+        await Course.findOneAndDelete({ _id: id });
         res.status(200).json({ message: 'Course deleted successfully' });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 }
 
-const getCourse = async (req, res) => {
+const getCourseById = async (req, res) => {
     try {
-        const { courseCode, academicYear, semester } = req.params;
+        const id= req.params.id;
 
-        const course = await Course.findOne({ courseCode: courseCode, academicYear: academicYear, semester: semester });
+        const course = await Course.findOne({ _id: id });
 
         if(course == null) {
             return res.status(404).json({ message: 'Course not found' });
@@ -106,6 +106,6 @@ module.exports = {
     getAllCourses,
     updateCourse,
     deleteCourse,
-    getCourse,
+    getCourseById,
     searchCourses
 };
