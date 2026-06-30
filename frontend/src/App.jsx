@@ -5,6 +5,7 @@ import PageHeader from './components/header';
 import Lecturers from './pages/admin/Lecturers';
 import AddStudent from './pages/admin/AddStudent';
 import CourseRegistration from './students/EnrolementPage';
+import StudentLogin from './students/StudentLogin';
 
 function App() {
   const [message, setMessage] = useState("Loading backend status...");
@@ -20,19 +21,13 @@ function App() {
     <BrowserRouter>
       <Routes>
       
-        <Route path="/admin" element={
-            <AdminLayout pageTitle="Dashboard">
-              <h1>Dashboard page</h1>
-            </AdminLayout>
-        } />
+        <Route path="/admin" element={ <AdminLayout pageTitle="Dashboard"> <h1>Dashboard page</h1> </AdminLayout> } />
         
-       
         <Route path="/admin/lecturers" element={<Lecturers />} />
         <Route path="/admin/students" element={<AddStudent />} />
-        
         <Route path="/student/registration" element={<CourseRegistration />} />
-
         <Route path="/head" element={<PageHeader />} />
+        <Route path="/" element={<StudentLogin />} />
 
       </Routes>
     </BrowserRouter>

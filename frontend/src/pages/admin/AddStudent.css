@@ -9,7 +9,7 @@
 }
 
 .message.success {
-    color: blue;
+    color: rgb(42, 169, 86);
 }
 
 .message.error {
