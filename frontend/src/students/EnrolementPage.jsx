@@ -16,6 +16,9 @@ function CourseRegistration (){
                 <button className='action_btn'>
                     Search course
                 </button>
+                <div className='courses_list'>
+                    
+                </div>
             </div>
             <div>
                 hoooo
