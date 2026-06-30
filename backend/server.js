@@ -4,6 +4,11 @@ const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const lecturerRoutes = require('./routes/lecturerRoutes');
 
+<<<<<<< Updated upstream
+=======
+const BatchRouter = require('./routes/batchProgressRoutes');
+const courseRouter = require('./routes/courseRoutes');
+>>>>>>> Stashed changes
 
 dotenv.config();
 connectDB(); // Connecting to MongoDB
@@ -17,6 +22,14 @@ app.use('/api/lecturers', lecturerRoutes);
 app.get('/api/status', (req, res) => {
   res.json({ message: "Backend and MongoDB are fully connected! " });
 });
+
+
+
+
+app.use('/api/courses', courseRouter);
+app.use('/api/batch',BatchRouter);
+
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
