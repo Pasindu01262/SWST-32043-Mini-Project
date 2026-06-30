@@ -6,6 +6,12 @@ const lecturerRoutes = require('./routes/lecturerRoutes');
 const studentRoutes = require('./routes/studentRoutes');
 
 
+const BatchRouter = require('./routes/batchProgressRoutes');
+const courseRouter = require('./routes/courseRoutes');
+
+
+const courseRouter = require('./routes/courseRoutes');
+
 const courseRouter = require('./routes/courseRoutes');
 
 dotenv.config();
@@ -24,7 +30,14 @@ app.get('/api/status', (req, res) => {
 });
 
 
+
 app.use('/api/courses', courseRouter);
+
+
+
+app.use('/api/courses', courseRouter);
+app.use('/api/batch',BatchRouter);
+
 
 
 
