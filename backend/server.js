@@ -9,6 +9,7 @@ const studentRoutes = require('./routes/studentRoutes');
 const BatchRouter = require('./routes/batchProgressRoutes');
 const courseRouter = require('./routes/courseRoutes');
 const EnrollmentRouter = require('./routes/EnrollmentRoutes');
+const courseRouter = require('./routes/courseRoutes');
 
 dotenv.config();
 connectDB(); // Connecting to MongoDB
