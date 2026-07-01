@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import AdminLayout from '../../layouts/AdminLayout';
 import axios from 'axios';
 import './Courses.css';
+import { Pencil, Trash2 } from 'lucide-react';
 
 const Courses = () => {
 
-    
+    // Stores all values entered in the course form
     const [formData, setFormData] = useState({
         courseName: '',
         courseCode: '',
@@ -15,38 +16,54 @@ const Courses = () => {
         semester: ''
     });
 
-    const [courses, setCourses] = useState([]);
-
     
+    const [courses, setCourses] = useState([]);
+    const [editing, setEditing] = useState(null);
     const [message, setMessage] = useState('');
     const [messageType, setMessageType] = useState(''); 
 
+    
+
+    // Fetch all courses from the backend 
+    const fetchCourses = async () => {
+    try {
+        const response = await axios.get('http://localhost:5000/api/courses');
+        setCourses(response.data);
+    } catch (error) {
+        console.error('Error fetching courses:', error);
+    }
+    };
+
+
     useEffect(() => {
-        axios.get('http://localhost:5000/api/courses')
-            .then(response => {
-                setCourses(response.data);
-            })
-            .catch(error => {
-                console.error('Error fetching courses:', error);
-            });
+        fetchCourses();
     }, []);
 
-    
+    // Updates the corresponding form field whenever the user types
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    
+      // Handles both adding a new course and updating an existing course
     const handleSubmit = async (e) => {
         e.preventDefault(); 
 
         try {
-            
-            await axios.post('http://localhost:5000/api/courses', formData);
 
+            if (editing) {
+
+                await axios.put(`http://localhost:5000/api/courses/${editing}`, formData);
+                setMessage('Course updated successfully!');
+                setMessageType('success');
+                setEditing(null);
+
+            }else {
             
-            setMessage('Course added successfully!');
-            setMessageType('success');
+                await axios.post('http://localhost:5000/api/courses', formData);
+                setMessage('Course added successfully!');
+                setMessageType('success');
+
+            }
 
             
             setFormData({
@@ -58,6 +75,8 @@ const Courses = () => {
                 semester: ''
             });
 
+            fetchCourses();
+
         } catch (error) {
             
             setMessage(error.response?.data?.message || 'Failed to add course');
@@ -65,13 +84,58 @@ const Courses = () => {
         }
     };
 
+    const handleEdit = (course) => {
+        setEditing(course._id);
+        setFormData({
+            courseName: course.courseName,
+            courseCode: course.courseCode,
+            credits: course.credits,
+            level: course.level,
+            academicYear: course.academicYear,
+            semester: course.semester
+        });
+        setMessage('');
+    };
+
+      // Cancels editing and restores the form to Add Course mode
+    const handleCancelEdit = () => {
+        setEditing(null);
+        setFormData({
+            courseName: '',
+            courseCode: '',
+            credits: '',
+            level: '',
+            academicYear: '',
+            semester: ''
+        });
+        setMessage('');
+    }
+
+    // Deletes the selected course after user confirmation
+    const handleDelete = async (id) => {
+        const confirmDelete = window.confirm('Are you sure you want to delete this course?');
+        if (!confirmDelete) return;
+
+        try {
+            await axios.delete(`http://localhost:5000/api/courses/${id}`);
+            setMessage('Course deleted successfully!');
+            setMessageType('success');
+            fetchCourses();
+        } catch (error) {
+            setMessage( 'Failed to delete course');
+            setMessageType('error');
+        }
+    }
+
+    
+
     return (
         <AdminLayout pageTitle="Courses">
             <div className="courses-container">
 
                 
                 <div className="courses-form-card">
-                    <h3>Add New Course</h3>
+                    <h3>{editing ? 'Edit Course' : 'Add New Course'}</h3>
 
                     <form onSubmit={handleSubmit}>
 
@@ -156,8 +220,17 @@ const Courses = () => {
                         )}
 
                         <button type="submit" className="btn-add">
-                            + Add Course
+                            {editing ? 'Update Course' : '+ Add Course'}
                         </button>
+                        {editing && (
+                        <button
+                            type="button"
+                            className="btn-cancel"
+                            onClick={handleCancelEdit}
+                        >
+                            Cancel
+                        </button>
+                    )}
 
                     </form>
                 </div>
@@ -174,12 +247,13 @@ const Courses = () => {
                                     <th>Credits</th>
                                     <th>Semester</th>
                                     <th>Academic Year</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {courses.length === 0 ? (
                                     <tr>
-                                        <td colSpan="5" className="no-data">
+                                        <td colSpan="6" className="no-data">
                                             No Courses found
                                             </td>
                                     </tr>
@@ -191,6 +265,20 @@ const Courses = () => {
                                         <td>{course.credits}</td>
                                         <td>{course.semester}</td>
                                         <td>{course.academicYear}</td>
+                                        <td className="action-buttons">
+                                            <button
+                                                className="btn-edit"
+                                                onClick={() => handleEdit(course)}
+                                            >
+                                                <Pencil size={16} />
+                                            </button>
+                                            <button
+                                                className="btn-delete"
+                                                onClick={() => handleDelete(course._id)}
+                                            >
+                                                <Trash2 size={16} />
+                                            </button>
+                                        </td>
                                     </tr>
                                 ))
                                 )}
