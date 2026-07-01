@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AdminLayout from '../../layouts/AdminLayout';
 import axios from 'axios';
 import './Courses.css';
@@ -15,9 +15,21 @@ const Courses = () => {
         semester: ''
     });
 
+    const [courses, setCourses] = useState([]);
+
     
     const [message, setMessage] = useState('');
     const [messageType, setMessageType] = useState(''); 
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/courses')
+            .then(response => {
+                setCourses(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching courses:', error);
+            });
+    }, []);
 
     
     const handleChange = (e) => {
@@ -153,7 +165,38 @@ const Courses = () => {
                 
                 <div className="courses-table-card">
                     <h3>Available Courses</h3>
-                    <p>Course list </p>
+                    <div className="table-wrapper">
+                        <table className="courses-table">
+                            <thead>
+                                <tr>
+                                    <th>Course Name</th>
+                                    <th>Course Code</th>
+                                    <th>Credits</th>
+                                    <th>Semester</th>
+                                    <th>Academic Year</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {courses.length === 0 ? (
+                                    <tr>
+                                        <td colSpan="5" className="no-data">
+                                            No Courses found
+                                            </td>
+                                    </tr>
+                                ) : (
+                                courses.map(course => (
+                                    <tr key={course._id}>
+                                        <td>{course.courseName}</td>
+                                        <td>{course.courseCode}</td>
+                                        <td>{course.credits}</td>
+                                        <td>{course.semester}</td>
+                                        <td>{course.academicYear}</td>
+                                    </tr>
+                                ))
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
             </div>
