@@ -245,6 +245,7 @@ const Courses = () => {
                                     <th>Course Name</th>
                                     <th>Course Code</th>
                                     <th>Credits</th>
+                                    <th>Level</th>
                                     <th>Semester</th>
                                     <th>Academic Year</th>
                                     <th>Actions</th>
@@ -253,7 +254,7 @@ const Courses = () => {
                             <tbody>
                                 {courses.length === 0 ? (
                                     <tr>
-                                        <td colSpan="6" className="no-data">
+                                        <td colSpan="7" className="no-data">
                                             No Courses found
                                             </td>
                                     </tr>
@@ -263,6 +264,7 @@ const Courses = () => {
                                         <td>{course.courseName}</td>
                                         <td>{course.courseCode}</td>
                                         <td>{course.credits}</td>
+                                        <td>{course.level}</td>
                                         <td>{course.semester}</td>
                                         <td>{course.academicYear}</td>
                                         <td className="action-buttons">
