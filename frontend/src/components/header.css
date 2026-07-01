@@ -1,5 +1,6 @@
 .page-header {
   display: flex;
+  
   align-items: center;
   justify-content: space-between;
   background-color: #0f2a47;
@@ -28,4 +29,9 @@
 
 .page-header__back-btn:hover {
   background-color: #e6eef5;
+}
+
+.page-header__student-id{
+  color: #ffffff;
+  font-size: 1.2rem;
 }

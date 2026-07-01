@@ -1,6 +1,7 @@
 .container{
     display: flex;
     flex-direction: column;
+    gap: 32px;
 }
 
 .button_row{
@@ -22,6 +23,7 @@
 
 .action_btn:hover{
     background:#21446f;
+    width:fit-content;
 }
 
 .serach_box{
@@ -55,11 +57,121 @@
     display:flex;
     flex-direction:row;
     gap:32px;
+    margin-left: 16px;
+    font-size:20px;
 }
 
 .course_card{
     display:flex;
     flex-direction:row;
-    background:#4d94ec;
     border-radius:12px;
+    border:1px solid #173253;
+    padding-inline-start: 32px;
+}
+
+.details_card {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 1px; /* Adjust this value as needed */
+}
+
+.details_card h3{
+    margin-block-start: 16px;
+    margin-block-end: 0px;
+    font-size: 20px;
+    font-weight: 600;
+}
+.course-credits {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: fit-content;
+    padding: 5px 14px;
+
+    background: #7fb9f3;
+    color: #173253;
+
+    border-radius: 999px;
+    border:1px solid #173253;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    margin-top: 8px;
+}
+.course-name{
+    font-size: 24px;
+    font-weight: 600;
+    margin-block-start: 16px;
+    margin-block-end: 0px;
+}
+
+.enroll_card{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding-block-start: 24px;
+    padding-block-end: 24px;
+    padding-inline-start: 24px;
+    padding-inline-end: 24px;
+    
+}
+.course-name{
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.enroll_text,
+.enrolled_text {
+    padding: 12px 24px;
+    border-radius: 20px;
+    border: 1px solid #856404;
+    font-weight: 600;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.enroll_text {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.enrolled_text {
+    background: #d4edda;
+    color: #155724;
+}
+
+.level, .semester, .registered-credits {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: fit-content;
+    padding: 2px 14px;
+
+    background: #f4f68b;
+    color: #745f01;
+
+    border-radius: 999px;
+    border:1px solid #745f01;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    margin-top: 8px; 
+}
+.semester {
+    background: #92ee8a;
+    color: #016019;
+    border:1px solid #017a1f;
+}
+
+.registered-credits {
+    background: #f9807a;
+    color: #731100;
+    border:1px solid #731100;
 }

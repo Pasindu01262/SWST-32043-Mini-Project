@@ -12,9 +12,10 @@ function CourseRegistration (){
 
 
     const [courses, setCourses] = useState([]);
-    const [selectedCourses, setSelectedCourses] = useState([]);
+    /*const [selectedCourses, setSelectedCourses] = useState([]);*/
     const [searchTerm, setSearchTerm] = useState('');
     const [registeredCredits, setRegisteredCredits] = useState(0);
+    const [isEnrolled, setIsEnrolled] = useState(false);
 
     useEffect(() => {
         const fetchCourses = async () => {
@@ -32,7 +33,8 @@ function CourseRegistration (){
         fetchCourses();
     }, []);
 
-    const handleAddCourse = (course) => {
+
+    /*const handleAddCourse = (course) => {
 
         const existingCourse = selectedCourses.find(
             (c) => c.courseCode === course.courseCode
@@ -47,21 +49,27 @@ function CourseRegistration (){
         } else {
             alert('This course is already added.');
         }
-    };
+    };*/
 
     const handleSubmit = async () => {
         try{
+            const enrollmentCourses = courses.map(course => ({
+                courseCode: course.courseCode,
+                credits: course.credits
+            }));
+
             await axios.post('http://localhost:5000/api/enrollments/enroll', 
             {
                 studentId: stID,
-                courses: selectedCourses
+                courses: enrollmentCourses
             },{
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             }
         );
-            alert('Selected courses submitted successfully!');
+        setIsEnrolled(true);
+        alert('Selected courses submitted successfully!');
         }catch (error) {
             console.error('Error submitting selected courses:', error);
         }
@@ -105,9 +113,9 @@ function CourseRegistration (){
                 </button>
             </div>
             <div className='Level_details'>
-                <p>Year: {courses[0]?.level} </p>
-                <p>Semester: {courses[0]?.semester} </p>
-                <p>Registered Credits: {registeredCredits} </p>
+                <p className='level'>{courses[0]?.level} </p>
+                <p className='semester'>{courses[0]?.semester} </p>
+                <p className='registered-credits'>Registered Credits: {registeredCredits} </p>
                 <button 
                 className='action_btn'
                 onClick={handleSubmit}>
@@ -119,17 +127,15 @@ function CourseRegistration (){
                 {courses.map((course) => (
                     <div key={course._id} className='course_card'>
                         <div className='details_card'>
-                            <h3>{course.courseCode}</h3>
-                            <p>{course.courseName}</p>
-                            <p>Credits: {course.credits}</p>
-                            <p>Lecturer: {course.lecturer}</p>
+                            <h3 >{course.courseCode}</h3>
+                            <p className='course-name'>{course.courseName}</p>
+                            <p className='course-credits'>Credits {course.credits}</p>
+                            
                         </div>
-                        <div className='action_card'>
-                            <button 
-                            className='action_btn' 
-                            onClick={() => handleAddCourse(course)}>
-                                Add
-                                </button>
+                        <div className='enroll_card'>
+                            <span className={isEnrolled ? "enrolled_text" : "enroll_text"}>
+                                {isEnrolled ? "Enrolled" : "Enroll"}
+                            </span>
                         </div>
                     </div>
                 ))}     
