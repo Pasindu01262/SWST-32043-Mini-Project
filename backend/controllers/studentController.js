@@ -87,7 +87,8 @@ const loginStudent = async (req, res) => {
                 studentId: student.studentId,
                 name: student.name,
                 email: student.email,
-                role: student.role
+                role: student.role,
+                joinYear: student.joinYear
             }
         });
 

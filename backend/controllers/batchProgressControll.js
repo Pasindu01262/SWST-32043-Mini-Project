@@ -1,4 +1,5 @@
 const Batch = require('../models/BatchProgress');
+const Student = require('../models/studentModel');
 const Course = require('../models/Course');
 const Registerbatch = async (req, res) => {
     try{
@@ -29,7 +30,9 @@ const ShowCourse = async (req, res) => {
             level: batchdetails.currentYearLevel,
             semester: batchdetails.currentSemester
         });
-        res.status(200).json(courses);
+        res.status(200).json(
+            courses
+        );
 
     } catch (error) {
         res.status(500).json({ message: error.message });

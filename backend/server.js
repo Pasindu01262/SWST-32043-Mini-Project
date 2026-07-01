@@ -8,6 +8,7 @@ const studentRoutes = require('./routes/studentRoutes');
 
 const BatchRouter = require('./routes/batchProgressRoutes');
 const courseRouter = require('./routes/courseRoutes');
+const EnrollmentRouter = require('./routes/EnrollmentRoutes');
 
 dotenv.config();
 connectDB(); // Connecting to MongoDB
@@ -17,6 +18,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/api/lecturers', lecturerRoutes);
 app.use('/api/students', studentRoutes);
+app.use('/api/enrollments', EnrollmentRouter);
 
 
 // Test API for communicating with the frontend

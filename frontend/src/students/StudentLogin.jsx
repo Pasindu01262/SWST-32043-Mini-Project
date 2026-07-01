@@ -28,7 +28,7 @@ const StudentLogin = () => {
             localStorage.setItem('studentData', JSON.stringify(response.data.student));
             
             // Navigate to the Course Registration page after successful login
-            navigate('/student/registration'); 
+            navigate('/student/profile'); 
             
         } catch (err) {
             setError(err.response?.data?.message || 'An error occurred while logging in.');

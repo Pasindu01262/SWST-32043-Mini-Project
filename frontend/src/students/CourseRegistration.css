@@ -46,3 +46,20 @@
     color:#777;
 
 }
+.year_semester{
+    color:#173253;
+    font-size:15px;
+}
+
+.Level_details{
+    display:flex;
+    flex-direction:row;
+    gap:32px;
+}
+
+.course_card{
+    display:flex;
+    flex-direction:row;
+    background:#4d94ec;
+    border-radius:12px;
+}

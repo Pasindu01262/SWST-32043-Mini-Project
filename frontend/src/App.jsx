@@ -6,6 +6,8 @@ import Lecturers from './pages/admin/Lecturers';
 import AddStudent from './pages/admin/AddStudent';
 import CourseRegistration from './students/EnrolementPage';
 import StudentLogin from './students/StudentLogin';
+import StudentProfileHeader from './components/StudentProfileHeader';
+import StudentProfilePage from './students/StudentProfilePage';
 
 function App() {
   const [message, setMessage] = useState("Loading backend status...");
@@ -28,6 +30,7 @@ function App() {
         <Route path="/student/registration" element={<CourseRegistration />} />
         <Route path="/head" element={<PageHeader />} />
         <Route path="/" element={<StudentLogin />} />
+        <Route path="/student/profile" element={<StudentProfilePage />} />
 
       </Routes>
     </BrowserRouter>
