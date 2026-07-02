@@ -4,10 +4,9 @@ const { createCourse, getAllCourses, updateCourse,  deleteCourse, searchCourses,
 
 
 courseRouter.post('/', createCourse);
-
 courseRouter.get('/', getAllCourses);
-
 courseRouter.get('/search', searchCourses);
+
 
 courseRouter.get('/:id', getCourseById);
 

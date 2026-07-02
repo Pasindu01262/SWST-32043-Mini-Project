@@ -122,7 +122,7 @@ const Courses = () => {
             setMessageType('success');
             fetchCourses();
         } catch (error) {
-            setMessage( 'Failed to delete course');
+            setMessage(error.response?.data?.message || 'Failed to delete course');
             setMessageType('error');
         }
     }
@@ -245,9 +245,9 @@ const Courses = () => {
                                     <th>Course Name</th>
                                     <th>Course Code</th>
                                     <th>Credits</th>
+                                    <th>Academic Year</th>
                                     <th>Level</th>
                                     <th>Semester</th>
-                                    <th>Academic Year</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -264,9 +264,9 @@ const Courses = () => {
                                         <td>{course.courseName}</td>
                                         <td>{course.courseCode}</td>
                                         <td>{course.credits}</td>
+                                        <td>{course.academicYear}</td>
                                         <td>{course.level}</td>
                                         <td>{course.semester}</td>
-                                        <td>{course.academicYear}</td>
                                         <td className="action-buttons">
                                             <button
                                                 className="btn-edit"
