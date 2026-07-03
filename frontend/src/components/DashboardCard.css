@@ -1,0 +1,43 @@
+.dashboard-card {
+    width: 250px;
+    background: #102B4E;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+}
+
+.icon-container {
+    width: 95px;
+    height: 95px;
+    margin: auto;
+    background: white;
+    border-radius: 15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-icon {
+    width: 60px;
+    height: 60px;
+}
+
+.dashboard-card h3 {
+    color: #8FD7FF;
+    margin: 20px 0;
+}
+
+.dashboard-card button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.dashboard-card button:hover {
+    background: #f0f0f0;
+}
