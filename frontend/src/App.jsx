@@ -6,7 +6,6 @@ import Lecturers from './pages/admin/Lecturers';
 import AddStudent from './pages/admin/AddStudent';
 import CourseRegistration from './students/EnrolementPage';
 import StudentLogin from './students/StudentLogin';
-import Courses from './pages/admin/Courses';
 
 function App() {
   const [message, setMessage] = useState("Loading backend status...");
@@ -25,7 +24,6 @@ function App() {
         <Route path="/admin" element={ <AdminLayout pageTitle="Dashboard"> <h1>Dashboard page</h1> </AdminLayout> } />
         
         <Route path="/admin/lecturers" element={<Lecturers />} />
-        <Route path="/admin/courses" element={<Courses />} />
         <Route path="/admin/students" element={<AddStudent />} />
         <Route path="/student/registration" element={<CourseRegistration />} />
         <Route path="/head" element={<PageHeader />} />
