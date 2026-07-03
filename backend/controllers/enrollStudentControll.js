@@ -89,5 +89,58 @@ const calculateTotalCredits = async (req, res) => {
     }
 };
 
+//search enrolled courses by subject ID
+/*const searchEnrolledCourses = async (req, res) => {
+    try {
+        const { studentId, subjectId } = req.params;
+        const student = await Student.findOne({ studentId })
+        .populate('enrolledCourses', 'courseCode credits');
 
-module.exports = { enrollStudent, calculateTotalCredits };
+        if (!student) {
+            return res.status(404).json({
+                message: "Student not found"
+            });
+        }
+
+        const enrolledCourses = student.enrolledCourses.filter(course => course._id.toString() === subjectId);
+
+        res.status(200).json({
+            message: "Enrolled courses found",
+            courses: enrolledCourses
+        });
+
+    } catch (err) {
+        res.status(500).json({
+            message: err.message
+        });
+    }
+};*/
+
+//get all enrolled courses for a student
+const getEnrolledCourses = async (req, res) => {
+    try {
+        const { studentId } = req.params;
+        const student = await Student.findOne({ studentId })
+        .populate('enrolledCourses', 'courseCode ');
+
+        if (!student) {
+            return res.status(404).json({
+                message: "Student not found"
+            });
+        }
+
+        res.status(200).json({
+            message: "Enrolled courses found",
+            courses: student.enrolledCourses
+        });
+
+        console.log("Populated student3:", student);
+
+    } catch (err) {
+        res.status(500).json({
+            message: err.message
+        });
+    }
+};
+
+module.exports = { enrollStudent, calculateTotalCredits, getEnrolledCourses };

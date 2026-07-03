@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './StudentProfilePage.css';
 import StudentProfileHeader from '../components/StudentProfileHeader';
 import DashboardCard from '../components/DashboardCard';
+
 function StudentProfilePage(){
     const navigate = useNavigate();
 

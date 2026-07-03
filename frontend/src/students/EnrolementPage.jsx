@@ -1,9 +1,12 @@
 import React, { use } from 'react';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import PageHeader from '../components/header';
 import './CourseRegistration.css';
 function CourseRegistration (){
+
+    const navigate = useNavigate();
 
     const studentData = JSON.parse(localStorage.getItem('studentData'));
     const token = localStorage.getItem('studentToken');
@@ -100,14 +103,23 @@ function CourseRegistration (){
             title='Course Registration' 
             StudentID={stID} />
             <div className='button_row'>
-                <button className='action_btn'>See enrolement</button>
-                <button className='action_btn'>download PDF</button>
+                <button 
+                className='action_btn1'
+                onClick={() => navigate('/student/enrolled-courses')}
+                >
+                    All Enrollments
+                </button>
+                <div className='stuID'>
+                    <span className='student_id'>{stID}</span>
+                </div>
+                {/*<button className='action_btn'>See Results</button>*/}
                 <div className='serach_box'>
                     <input
                     type = "text"
                     placeholder = "Enter Course Code"
                     />
                 </div>
+                
                 <button className='action_btn'>
                     Search course
                 </button>
@@ -117,7 +129,7 @@ function CourseRegistration (){
                 <p className='semester'>{courses[0]?.semester} </p>
                 <p className='registered-credits'>Registered Credits: {registeredCredits} </p>
                 <button 
-                className='action_btn'
+                className='action_btn2'
                 onClick={handleSubmit}>
                     Submit
                 </button>
