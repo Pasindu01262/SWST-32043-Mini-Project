@@ -3,7 +3,11 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 
+
+const BatchRouter = require('./routes/batchProgressRoutes');
 const courseRouter = require('./routes/courseRoutes');
+const EnrollmentRouter = require('./routes/EnrollmentRoutes');
+//const courseRouter = require('./routes/courseRoutes');
 
 dotenv.config();
 connectDB(); // Connecting to MongoDB
