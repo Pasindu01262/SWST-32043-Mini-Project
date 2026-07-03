@@ -1,5 +1,7 @@
 const Course = require('../models/Course');
 
+
+// Create a new course
 const createCourse = async (req, res) => {
     try {
     const existingCourse = await Course.findOne({
@@ -26,6 +28,7 @@ const createCourse = async (req, res) => {
 };
 
 
+// Retrieve all courses from the database
 const getAllCourses = async (req, res) => {
     try {
         const courses = await Course.find().sort({ createdAt: -1 });
@@ -36,6 +39,7 @@ const getAllCourses = async (req, res) => {
 };
 
 
+// Update an existing course
 const updateCourse = async (req, res) => {
     try {
         const id = req.params.id;
@@ -54,6 +58,8 @@ const updateCourse = async (req, res) => {
     }
 }
 
+
+// Delete a course 
 const deleteCourse = async (req, res) => {
     try {
         const id = req.params.id;
@@ -70,6 +76,8 @@ const deleteCourse = async (req, res) => {
     }
 }
 
+
+// Retrieve a single course using its ID
 const getCourseById = async (req, res) => {
     try {
         const id= req.params.id;
@@ -86,6 +94,8 @@ const getCourseById = async (req, res) => {
     }
 }
 
+
+// Search courses by course code
 const searchCourses = async (req, res) => {
     try {
         const courseCode = req.query.courseCode;

@@ -1,0 +1,203 @@
+
+.courses-container {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    overflow-x: hidden;
+}
+
+
+.courses-form-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 24px;
+    width: 320px;
+    min-width: 320px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.courses-form-card h3 {
+    margin: 0 0 20px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+
+.form-group {
+    margin-bottom: 14px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    color: #1e293b;
+    background-color: #f9fafb;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+    border-color: #3b82f6;
+}
+
+
+.form-message {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
+
+.form-message.success {
+    background-color: #dcfce7;
+    color: #16a34a;
+}
+
+.form-message.error {
+    background-color: #fee2e2;
+    color: #dc2626;
+}
+
+
+.btn-add {
+    width: 100%;
+    padding: 10px;
+    background-color: #0f172a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-add:hover {
+    background-color: #1e293b;
+}
+
+
+.courses-table-card {
+    flex: 1;
+    background-color: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    min-width: 0;
+    
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.courses-table-card h3 {
+    margin: 0 0 20px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+
+
+.courses-table {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    border: 1px solid #000000;
+}
+
+.courses-table th {
+    text-align: left;
+    padding: 10px 14px;
+    background-color: #f8fafc;
+    color: #475569;
+    font-weight: 600;
+    border-bottom: 1px solid #000000;
+    white-space: nowrap;
+}
+
+.courses-table td {
+    padding: 10px 14px;
+    color: #334155;
+    border-bottom: 1px solid #000000;
+}
+
+.courses-table tr:hover {
+    background-color: #f8fafc;
+}
+
+
+.no-data {
+    text-align: center;
+    color: #94a3b8;
+    padding: 24px !important;
+}
+
+
+
+.btn-cancel {
+    width: 100%;
+    padding: 10px;
+    background-color: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background-color 0.2s;
+}
+
+.btn-cancel:hover {
+    background-color: #e2e8f0;
+}
+
+
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-edit {
+    padding: 6px 8px;
+    background-color: #eff6ff;
+    color: #3b82f6;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-edit:hover {
+    background-color: #dbeafe;
+}
+
+.btn-delete {
+    padding: 6px 8px;
+    background-color: #fef2f2;
+    color: #ef4444;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-delete:hover {
+    background-color: #fee2e2;
+}
