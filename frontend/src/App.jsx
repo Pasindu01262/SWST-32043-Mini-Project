@@ -6,6 +6,9 @@ import StudentLogin from './students/StudentLogin';
 import CourseRegistration from './students/EnrolementPage';
 import EnrolledCoursesList from './students/CoursesListShowPage';
 import Lecturers from './pages/admin/Lecturers';
+import AdminLayout from './layouts/AdminLayout';
+import AddStudent from './pages/admin/AddStudent';
+
 
 function App() {
   const [message, setMessage] = useState("Loading backend status...");
@@ -37,6 +40,8 @@ function App() {
 
         {/* lecturers list page */}
         <Route path="/admin/lecturers" element={<Lecturers />} />
+
+        <Route path="/admin/students" element={<AddStudent />} />
 
         {/* Fallback Selection Portal Landing Page */}
       </Routes>

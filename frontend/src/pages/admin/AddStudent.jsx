@@ -37,7 +37,7 @@ const AddStudent = () => {
     };
 
     return (
-        <AdminLayout>
+         <AdminLayout pageTitle="Student Registration">
             <div className="add-student-container">
                 <h2>Student registration</h2>
                 
