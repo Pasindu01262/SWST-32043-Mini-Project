@@ -1,8 +1,12 @@
 import React from "react";
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import PageHeader from '../components/header';
+import './CoursesListShowPage.css';
 
 function EnrolledCoursesList (){
+    const navigate = useNavigate();
     const studentData = JSON.parse(localStorage.getItem('studentData'));
     const token = localStorage.getItem('studentToken');
     const stID = studentData ?.studentId;
@@ -17,7 +21,7 @@ function EnrolledCoursesList (){
                         'Authorization': `Bearer ${token}`
                     }
                 });
-                setEnrolledCourses(response.data);
+                setEnrolledCourses(response.data.courses);
             } catch (error) {
                 console.error('Error fetching enrolled courses:', error);
             }
@@ -30,14 +34,30 @@ function EnrolledCoursesList (){
 
     return (
         <div>
-            <h2>Enrolled Courses</h2>
-            <ul>
-                {enrolledCourses.map((course) => (
-                    <li key={course.courseId}>
-                        <strong>{course.courseName}</strong> - {course.courseCode}
-                    </li>
-                ))}
-            </ul>
+            <PageHeader 
+            title="Enrolled Courses" 
+            buttonText="Back to enrollment"
+            onBack={() => navigate("/student/registration")}
+            />
+            <h3>Student ID: {stID}</h3>
+            <div className="enrolled-courses-container">
+                {/* Display the enrolled courses in a card list */}
+                {enrolledCourses.length > 0 ? (
+                    <div className="courses-grid">
+                        {enrolledCourses.map((course) => (
+                            <div key={course.courseId} className="course-card">
+                                <h3>{course.courseName}</h3>
+                                <p>{course.courseCode}</p>
+                                <p>Credits: {course.credits}</p>
+                                <p>{course.level}</p>
+                                <p>{course.semester}</p>
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <p>No enrolled courses found.</p>
+                )}
+            </div>
         </div>
     );
 };

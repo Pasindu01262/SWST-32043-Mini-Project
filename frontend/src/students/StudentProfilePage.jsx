@@ -32,7 +32,7 @@ function StudentProfilePage(){
                     icon="/path/to/lecturers-icon.png"
                     title="Lecturers"
                     buttonText="View Details"
-                    onClick={ () => console.log("Lecturers") }
+                    onClick={ () => navigate("/student/lecturerslist") }
                 />
                 <DashboardCard
                     icon="/path/to/grades-icon.png"

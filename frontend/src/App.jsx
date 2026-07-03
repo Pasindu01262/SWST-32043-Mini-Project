@@ -8,6 +8,8 @@ import Lecturers from './pages/admin/Lecturers';
 import AdminLayout from './layouts/AdminLayout';
 import AddStudent from './pages/admin/AddStudent';
 import Courses from './pages/admin/Courses';
+import LecturersList from './lecturePage/LectureList'
+
 
 
 function App() {
@@ -45,6 +47,7 @@ function App() {
 
         <Route path="/admin/students" element={<AddStudent />} />
 
+        <Route path="/student/lecturerslist" element={<LecturersList/>}/>
         {/* Fallback Selection Portal Landing Page */}
       </Routes>
     </BrowserRouter>
