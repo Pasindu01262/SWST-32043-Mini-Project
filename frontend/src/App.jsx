@@ -7,6 +7,7 @@ import EnrolledCoursesList from './students/CoursesListShowPage';
 import Lecturers from './pages/admin/Lecturers';
 import AdminLayout from './layouts/AdminLayout';
 import AddStudent from './pages/admin/AddStudent';
+import Courses from './pages/admin/Courses';
 
 
 function App() {
@@ -36,6 +37,8 @@ function App() {
 
         {/* Student enrolled courses list page */}
         <Route path="/student/enrolled-courses" element={<EnrolledCoursesList />} />
+
+        <Route path="/admin/courses" element={<Courses />} />
 
         {/* lecturers list page */}
         <Route path="/admin/lecturers" element={<Lecturers />} />
