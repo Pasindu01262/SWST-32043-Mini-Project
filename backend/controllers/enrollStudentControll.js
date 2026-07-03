@@ -121,7 +121,7 @@ const getEnrolledCourses = async (req, res) => {
     try {
         const { studentId } = req.params;
         const student = await Student.findOne({ studentId })
-        .populate('enrolledCourses', 'courseCode ');
+        .populate('enrolledCourses', 'courseCode courseName credits level semester');
 
         if (!student) {
             return res.status(404).json({

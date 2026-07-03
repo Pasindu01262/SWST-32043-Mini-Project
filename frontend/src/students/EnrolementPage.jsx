@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import PageHeader from '../components/header';
+import CourseCard from '../components/CoursCard';
 import './CourseRegistration.css';
 function CourseRegistration (){
 
@@ -18,7 +19,38 @@ function CourseRegistration (){
     /*const [selectedCourses, setSelectedCourses] = useState([]);*/
     const [searchTerm, setSearchTerm] = useState('');
     const [registeredCredits, setRegisteredCredits] = useState(0);
-    const [isEnrolled, setIsEnrolled] = useState(false);
+    
+    const [searchResults, setSearchResults] = useState([]);
+    const [showPopup, setShowPopup] = useState(false);
+    const [enrolledCourses, setEnrolledCourses] = useState([]);
+
+    useEffect(() => {
+        const fetchEnrolledCourses = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5000/api/enrollments/enrolledCourses/${encodeURIComponent(stID)}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                setEnrolledCourses(response.data.courses);
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error fetching enrolled courses:', error);
+            }
+        };
+        fetchEnrolledCourses();
+    }, [stID, token]);
+
+
+    const isCourseEnrolled = (courseCode) => {
+        return enrolledCourses.some(
+            (course) => course.courseCode === courseCode
+        );
+    };
+
+    const areAllCoursesEnrolled = () => {
+        return courses.every(course => isCourseEnrolled(course.courseCode));
+    };
 
     useEffect(() => {
         const fetchCourses = async () => {
@@ -55,6 +87,12 @@ function CourseRegistration (){
     };*/
 
     const handleSubmit = async () => {
+
+        if (areAllCoursesEnrolled()) {
+            alert("You have already enrolled in these courses.");
+            return;
+        }
+        
         try{
             const enrollmentCourses = courses.map(course => ({
                 courseCode: course.courseCode,
@@ -71,10 +109,35 @@ function CourseRegistration (){
                 }
             }
         );
-        setIsEnrolled(true);
+        
         alert('Selected courses submitted successfully!');
         }catch (error) {
             console.error('Error submitting selected courses:', error);
+            alert('Error submitting selected courses:',error);
+        }
+    };
+
+    const handleSearch = async () => {
+        if (searchTerm.trim() === '') {
+            alert('Please enter a course code to search.');
+            return;
+        }
+        try {
+            const response = await axios.get(
+                `http://localhost:5000/api/courses/search`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    },
+                    params: {
+                        courseCode: searchTerm
+                    }
+                }
+            );
+            setSearchResults(response.data);
+            setShowPopup(true);
+        } catch (error) {
+            console.error('Error searching courses:', error);
         }
     };
 
@@ -101,7 +164,10 @@ function CourseRegistration (){
         <div className='container'>
             <PageHeader 
             title='Course Registration' 
-            StudentID={stID} />
+            StudentID={stID}
+            buttonText="Back to profile"
+            onBack={() => navigate("/student/profile")} 
+            />
             <div className='button_row'>
                 <button 
                 className='action_btn1'
@@ -117,12 +183,22 @@ function CourseRegistration (){
                     <input
                     type = "text"
                     placeholder = "Enter Course Code"
+                    value = {searchTerm}
+                    onChange = {(e) => setSearchTerm(e.target.value)}
                     />
                 </div>
                 
-                <button className='action_btn'>
+                <button 
+                className='action_btn'
+                onClick={handleSearch}
+                >
                     Search course
                 </button>
+                <CourseCard
+                course_id={searchResults}
+                isOpen={showPopup}
+                onClose={() => setShowPopup(false)}
+                />
             </div>
             <div className='Level_details'>
                 <p className='level'>{courses[0]?.level} </p>
@@ -145,8 +221,17 @@ function CourseRegistration (){
                             
                         </div>
                         <div className='enroll_card'>
-                            <span className={isEnrolled ? "enrolled_text" : "enroll_text"}>
-                                {isEnrolled ? "Enrolled" : "Enroll"}
+                            <span 
+                            className ={
+                                isCourseEnrolled(course.courseCode) 
+                                ? 'enrolled' 
+                                : 'not-enrolled'
+                            }
+                            >
+                               {isCourseEnrolled(course.courseCode) 
+                               ? 'Enrolled' 
+                               : 'Not Enrolled'
+                               }
                             </span>
                         </div>
                     </div>

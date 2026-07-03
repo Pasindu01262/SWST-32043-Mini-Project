@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import AdminDashboard from './components/AdminDashboard';
 import StudentProfilePage from './students/StudentProfilePage';
 import StudentLogin from './students/StudentLogin';
 import CourseRegistration from './students/EnrolementPage';
@@ -8,6 +7,7 @@ import EnrolledCoursesList from './students/CoursesListShowPage';
 import Lecturers from './pages/admin/Lecturers';
 import AdminLayout from './layouts/AdminLayout';
 import AddStudent from './pages/admin/AddStudent';
+import LecturersList from './lecturePage/LectureList'
 
 
 function App() {
@@ -43,6 +43,7 @@ function App() {
 
         <Route path="/admin/students" element={<AddStudent />} />
 
+        <Route path="/student/lecturerslist" element={<LecturersList/>}/>
         {/* Fallback Selection Portal Landing Page */}
       </Routes>
     </BrowserRouter>
