@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import AdminDashboard from './components/AdminDashboard';
 import StudentProfilePage from './students/StudentProfilePage';
 import StudentLogin from './students/StudentLogin';
 import CourseRegistration from './students/EnrolementPage';
