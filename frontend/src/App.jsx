@@ -1,27 +1,27 @@
-import { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+   import AdminResults from './pages/AdminResults';
+   import MyResults from './pages/MyResults';
 
+   function Home() {
+     return (
+       <div>
+         <h1>Student Results Management</h1>
+         <p><Link to="/admin/results">Go to Admin Results</Link></p>
+         <p><Link to="/my-results">Go to My Results</Link></p>
+       </div>
+     );
+   }
 
-function App() {
-  const [message, setMessage] = useState("Loading backend status...");
+   function App() {
+     return (
+       <BrowserRouter>
+         <Routes>
+           <Route path="/" element={<Home />} />
+           <Route path="/admin/results" element={<AdminResults />} />
+           <Route path="/my-results" element={<MyResults />} />
+         </Routes>
+       </BrowserRouter>
+     );
+   }
 
-  useEffect(() => {
-    fetch('http://localhost:5000/api/status')
-      .then((res) => res.json())
-      .then((data) => setMessage(data.message))
-      .catch((error) => setMessage("Backend connection failed! ❌"));
-  }, []);
-
-  return (
-    <div className="App">
-      <h1>University Course Registration Portal</h1>
-      <div className="card">
-        <h3>System Status:</h3>
-        <p style={{ color: message.includes('failed') ? 'red' : 'green', fontWeight: 'bold' }}>
-          {message}
-        </p>
-      </div>
-    </div>
-  )
-}
-
-export default App
+   export default App;
