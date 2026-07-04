@@ -9,6 +9,7 @@ import AdminLayout from './layouts/AdminLayout';
 import AddStudent from './pages/admin/AddStudent';
 import Courses from './pages/admin/Courses';
 import LecturersList from './lecturePage/LectureList'
+import AdminDashboard from './components/AdminDashboard'
 
 
 
@@ -26,7 +27,7 @@ function App() {
     <BrowserRouter>
       <Routes>
 
-        <Route path="/admin" element={ <AdminLayout pageTitle="Dashboard"> <h1>Dashboard page</h1> </AdminLayout> } />
+        <Route path="/admin" element={<AdminDashboard />} />
         
         {/* Student profile page */}
         <Route path="/student/profile" element={<StudentProfilePage />} />
