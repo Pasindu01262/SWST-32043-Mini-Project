@@ -1,54 +1,131 @@
-.popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    background: rgba(10, 10, 10, 0.5);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    z-index: 1000;
+.popup-overlay2 {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 42, 71, 0.55);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 1000;
+  animation: overlay-fade2 0.2s ease;
 }
 
-.popup-content {
-    background: white;
-    padding: 25px;
-    width: 450px;
-    border-radius: 12px;
-    position: relative;
+.popup-content2 {
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 32px;
+  width: 100%;
+  max-width: 480px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 12px 32px rgba(9, 22, 39, 0.25);
+  animation: popup-rise2 0.25s ease;
 }
 
-.close-btn {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    border: none;
-    background: transparent;
-    font-size: 22px;
-    cursor: pointer;
+.close-btn2 {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f4f7fb;
+  color: #0f2a47;
+  border: none;
+  border-radius: 50%;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.course_card2{
-    display: flex;
-    flex-direction: column;
-}
-.details_card2{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 20px;
-}
-.name2{
-    font-size: 32px;
-    font-weight: bold;
-    margin-right: 10px;
-    color: #333;
+.close-btn2:hover {
+  background-color: #0f2a47;
+  color: #ffffff;
 }
 
-.h32{
-    text-align: center;
+.close-btn2:focus-visible {
+  outline: 2px solid #7cc2ef;
+  outline-offset: 2px;
+}
+
+.course_card2 {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(15, 42, 71, 0.08);
+}
+
+.course_card2:first-of-type {
+  padding-top: 8px;
+}
+
+.course_card2:last-of-type {
+  border-bottom: none;
+}
+
+.course_card2 h3 {
+  color: #0f2a47;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.name3 {
+  color: #5a6b7d;
+  font-size: 0.95rem;
+  margin: 0 0 6px;
+}
+
+.details_card3 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.credits3,
+.level3,
+.semester3 {
+  display: inline-block;
+  margin: 0;
+  background-color: #e6f1fa;
+  color: #0f2a47;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+/* Animations */
+@keyframes overlay-fade2 {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popup-rise2 {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .popup-content2 {
+    padding: 24px 20px;
+    max-height: 80vh;
+  }
+
+  .close-btn2 {
+    top: 12px;
+    right: 12px;
+  }
 }
