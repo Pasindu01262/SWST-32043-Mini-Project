@@ -1,11 +1,12 @@
 import React from "react";
 import "./DashboardCard.css";
 
-function DashboardCard({ icon, title, buttonText, onClick }) {
+
+function DashboardCard({ icon: Icon, title, buttonText, onClick }) {
   return (
     <div className="dashboard-card">
       <div className="icon-container">
-        <img src={icon} alt={title} className="card-icon" />
+        <Icon className="card-icon" />
       </div>
 
       <h3>{title}</h3>

@@ -9,6 +9,7 @@ import AdminLayout from './layouts/AdminLayout';
 import AddStudent from './pages/admin/AddStudent';
 import Courses from './pages/admin/Courses';
 import LecturersList from './lecturePage/LectureList'
+import BatchRegistration from './students/BatchRegistration'
 
 
 
@@ -49,6 +50,11 @@ function App() {
 
         <Route path="/student/lecturerslist" element={<LecturersList/>}/>
         {/* Fallback Selection Portal Landing Page */}
+
+        {/*Batch registration */}
+        
+        <Route path="/student/batchregistration" element={<BatchRegistration/>}/>
+
       </Routes>
     </BrowserRouter>
   );

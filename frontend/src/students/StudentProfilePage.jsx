@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import './StudentProfilePage.css';
 import StudentProfileHeader from '../components/StudentProfileHeader';
 import DashboardCard from '../components/DashboardCard';
+import { PiExamFill } from "react-icons/pi";
+import { FaChalkboardTeacher } from "react-icons/fa";
+import { FaRegistered } from "react-icons/fa";
 
 function StudentProfilePage(){
     const navigate = useNavigate();
@@ -20,28 +23,36 @@ function StudentProfilePage(){
             // If no token is found, redirect to the login page
             window.location.href = '/';
         }}, [token]);
+
+    const handleLogout = () => {
+        localStorage.removeItem("studentToken");
+        localStorage.removeItem("studentData");
+        navigate("/");
+    };
         
 
     return(
         <div className='container'>
             <StudentProfileHeader 
             name={name} 
-            role={role} />
+            role={role} 
+            onLogout={handleLogout}
+            />
             <div className='dashboard_cards'>
                 <DashboardCard
-                    icon="/path/to/lecturers-icon.png"
+                    icon={FaChalkboardTeacher}
                     title="Lecturers"
                     buttonText="View Details"
                     onClick={ () => navigate("/student/lecturerslist") }
                 />
                 <DashboardCard
-                    icon="/path/to/grades-icon.png"
+                    icon={PiExamFill}
                     title="Grades"
                     buttonText="View Details"
                     onClick={ () => console.log("Grades") }
                 />
                 <DashboardCard
-                    icon="/path/to/profile-icon.png"
+                    icon={FaRegistered}
                     title="Registration"
                     buttonText="View Details"
                     /*navigate to registration page*/

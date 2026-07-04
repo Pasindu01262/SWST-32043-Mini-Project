@@ -1,0 +1,140 @@
+.success-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 42, 71, 0.55);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 1000;
+  animation: success-overlay-fade 0.2s ease;
+}
+
+.success-popup-content {
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 36px 32px 32px;
+  width: 100%;
+  max-width: 420px;
+  max-height: 85vh;
+  overflow-y: auto;
+  text-align: center;
+  box-shadow: 0 12px 32px rgba(9, 22, 39, 0.25);
+  animation: success-popup-rise 0.25s ease;
+}
+
+.success-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f4f7fb;
+  color: #0f2a47;
+  border: none;
+  border-radius: 50%;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.success-close-btn:hover {
+  background-color: #1e7a3d;
+  color: #ffffff;
+}
+
+.success-close-btn:focus-visible {
+  outline: 2px solid #1e7a3d;
+  outline-offset: 2px;
+}
+
+.success-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 16px;
+  background-color: #dcf5e3;
+  border-radius: 50%;
+}
+
+.success-icon svg {
+  width: 28px;
+  height: 28px;
+  color: #1e7a3d;
+}
+
+.success {
+  color: #0f2a47;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 20px;
+  line-height: 1.5;
+}
+
+.success-course-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.course_card2 {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(15, 42, 71, 0.06);
+}
+
+.course_card2:last-of-type {
+  border-bottom: none;
+}
+
+.details_card2 {
+  width: 100%;
+}
+
+.credits2 {
+  display: inline-block;
+  background-color: #dcf5e3;
+  color: #1e7a3d;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: 999px;
+  margin: 0;
+}
+
+/* Animations */
+@keyframes success-overlay-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes success-popup-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .success-popup-content {
+    padding: 32px 20px 24px;
+  }
+
+  .success-close-btn {
+    top: 12px;
+    right: 12px;
+  }
+}

@@ -36,10 +36,10 @@ function EnrolledCoursesList (){
         <div>
             <PageHeader 
             title="Enrolled Courses" 
+            StudentID={stID}
             buttonText="Back to enrollment"
             onBack={() => navigate("/student/registration")}
             />
-            <h3>Student ID: {stID}</h3>
             <div className="enrolled-courses-container">
                 {/* Display the enrolled courses in a card list */}
                 {enrolledCourses.length > 0 ? (
@@ -48,14 +48,16 @@ function EnrolledCoursesList (){
                             <div key={course.courseId} className="course-card">
                                 <h3>{course.courseName}</h3>
                                 <p>{course.courseCode}</p>
-                                <p>Credits: {course.credits}</p>
-                                <p>{course.level}</p>
-                                <p>{course.semester}</p>
+                                <div className="course-card__meta">
+                                    <span className="course-card__badge">Credits: {course.credits}</span>
+                                    <span className="course-card__badge">{course.level}</span>
+                                    <span className="course-card__badge">{course.semester}</span>
+                                </div>
                             </div>
                         ))}
                     </div>
                 ) : (
-                    <p>No enrolled courses found.</p>
+                    <p className="enrolled-courses-container__status">No enrolled courses found.</p>
                 )}
             </div>
         </div>

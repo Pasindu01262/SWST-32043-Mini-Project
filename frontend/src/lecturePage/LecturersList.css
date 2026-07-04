@@ -1,0 +1,163 @@
+.lecturers-page {
+  min-height: 100vh;
+  background-color: #f4f7fb;
+  padding: 28px 40px 60px;
+  box-sizing: border-box;
+}
+
+.lecturers-page__content {
+  margin-top: 32px;
+}
+
+.lecturers-page__status {
+  text-align: center;
+  color: #5a6b7d;
+  font-size: 1rem;
+  margin-top: 60px;
+}
+
+/* List container */
+.lec-list {
+  background-color: #ffffff;
+  border-radius: 14px;
+  border: 1px solid rgba(15, 42, 71, 0.08);
+  box-shadow: 0 2px 8px rgba(15, 42, 71, 0.06);
+  overflow: hidden;
+}
+
+/* Column header row */
+.lec-list__header {
+  display: grid;
+  grid-template-columns: 2fr 2.5fr 1.5fr;
+  gap: 16px;
+  padding: 14px 24px;
+  background-color: #0f2a47;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.lec-list__col {
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Data rows */
+.lec-row {
+  display: grid;
+  grid-template-columns: 2fr 2.5fr 1.5fr;
+  gap: 16px;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid rgba(15, 42, 71, 0.06);
+  transition: background-color 0.15s ease;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.lec-row:last-child {
+  border-bottom: none;
+}
+
+.lec-row:hover {
+  background-color: #f7fafd;
+}
+
+.lec-row__col--name {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #0f2a47;
+  font-weight: 600;
+  font-size: 0.95rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lec-row__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background-color: #e6f1fa;
+  color: #0f2a47;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.lec-row__col--email {
+  color: #0f2a47;
+  font-size: 0.9rem;
+  
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  
+}
+
+.lec-row__col--dept {
+  overflow: hidden;
+  
+}
+
+.lec-row__badge {
+  display: inline-block;
+  background-color: #e6f1fa;
+  color: #0f2a47;
+  font-size: 0.78rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* Tablet: drop email column, keep name + department */
+@media (max-width: 768px) {
+  .lecturers-page {
+    padding: 20px 24px 40px;
+  }
+
+  .lec-list__header,
+  .lec-row {
+    grid-template-columns: 2fr 1fr;
+  }
+
+  .lec-list__col--email,
+  .lec-row__col--email {
+    display: none;
+  }
+}
+
+/* Mobile: stack each row's fields vertically */
+@media (max-width: 480px) {
+  .lec-list__header {
+    display: none;
+  }
+
+  .lec-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 16px 20px;
+  }
+
+  .lec-row__col--email {
+    display: flex;
+    color: #5a6b7d;
+    font-size: 0.85rem;
+  }
+
+  .lec-row__col--email::before {
+    content: "Email: ";
+    font-weight: 600;
+    color: #0f2a47;
+  }
+
+  .lec-row__col--dept {
+    display: flex;
+  }
+}

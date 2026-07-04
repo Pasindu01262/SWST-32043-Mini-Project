@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import PageHeader from '../components/header';
 import CourseCard from '../components/CoursCard';
+import SuccessCard from '../components/successRegister';
+import ErrorCard from '../components/ErrorCard';
 import './CourseRegistration.css';
 function CourseRegistration (){
 
@@ -14,6 +16,8 @@ function CourseRegistration (){
     const joinedYear = studentData ?.joinYear;
     const stID = studentData ?.studentId;
 
+    
+
 
     const [courses, setCourses] = useState([]);
     /*const [selectedCourses, setSelectedCourses] = useState([]);*/
@@ -23,6 +27,11 @@ function CourseRegistration (){
     const [searchResults, setSearchResults] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
     const [enrolledCourses, setEnrolledCourses] = useState([]);
+    const [submittedCourses, setSubmittedCourses] = useState([]);
+    const [showSuccessCard, setShowSuccessCard] = useState(false);
+    const [showErrorCard,setshowErrorCard] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [successmsg,setSuccessmsg] = useState("");
 
     useEffect(() => {
         const fetchEnrolledCourses = async () => {
@@ -89,7 +98,8 @@ function CourseRegistration (){
     const handleSubmit = async () => {
 
         if (areAllCoursesEnrolled()) {
-            alert("You have already enrolled in these courses.");
+            setErrorMessage("You have already enrolled in these courses..!");
+            setshowErrorCard(true)
             return;
         }
         
@@ -109,8 +119,9 @@ function CourseRegistration (){
                 }
             }
         );
-        
-        alert('Selected courses submitted successfully!');
+        setSuccessmsg("Selected courses submitted successfully!")
+        setSubmittedCourses(courses);
+        setShowSuccessCard(true);
         }catch (error) {
             console.error('Error submitting selected courses:', error);
             alert('Error submitting selected courses:',error);
@@ -119,7 +130,8 @@ function CourseRegistration (){
 
     const handleSearch = async () => {
         if (searchTerm.trim() === '') {
-            alert('Please enter a course code to search.');
+            setErrorMessage("Please enter a course code to search..!");
+            setshowErrorCard(true)
             return;
         }
         try {
@@ -199,6 +211,11 @@ function CourseRegistration (){
                 isOpen={showPopup}
                 onClose={() => setShowPopup(false)}
                 />
+                <ErrorCard
+                errormsg = {errorMessage}
+                isOpen={showErrorCard}
+                onClose={()=> setshowErrorCard(false)}
+                />
             </div>
             <div className='Level_details'>
                 <p className='level'>{courses[0]?.level} </p>
@@ -209,6 +226,17 @@ function CourseRegistration (){
                 onClick={handleSubmit}>
                     Submit
                 </button>
+                <SuccessCard
+                enrolledCourses={submittedCourses}
+                isOpen={showSuccessCard}
+                onClose={() => setShowSuccessCard(false)}
+                msg={successmsg}
+                />
+                <ErrorCard
+                errormsg = {errorMessage}
+                isOpen={showErrorCard}
+                onClose={()=> setshowErrorCard(false)}
+                />
             </div>
             <div className='course_list'>
                 {/*Display the list of courses*/}
