@@ -7,6 +7,7 @@ const studentRoutes = require('./routes/studentRoutes');
 const BatchRouter = require('./routes/batchProgressRoutes');
 const courseRouter = require('./routes/courseRoutes');
 const EnrollmentRouter = require('./routes/EnrollmentRoutes');
+const dashboardRoutes = require('./routes/dashboardRoutes');
 
 dotenv.config();
 connectDB();
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use('/api/lecturers', lecturerRoutes);
 app.use('/api/students', studentRoutes);
 app.use('/api/enrollments', EnrollmentRouter);
+app.use('/api/dashboard', dashboardRoutes);
 
 app.get('/api/status', (req, res) => {
   res.json({ message: "Backend and MongoDB are fully connected! " });
