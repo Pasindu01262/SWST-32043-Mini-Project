@@ -9,6 +9,7 @@ connectDB(); // Connecting to MongoDB
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use('/api/grades', require('./routes/gradeRoutes'));
 
 // Test API for communicating with the frontend
 app.get('/api/status', (req, res) => {
