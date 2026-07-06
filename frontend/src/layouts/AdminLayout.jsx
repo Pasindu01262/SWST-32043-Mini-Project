@@ -26,7 +26,7 @@ const AdminLayout = ({ children, pageTitle }) => {
         </div>
 
         <nav className="sidebar-nav">
-          <Link to="/admin" className={isActive('/admin')}>
+          <Link to="/admin/Dashboard" className={isActive('/admin/Dashboard')}>
             <LayoutDashboard size={20} /> <span>Dashboard</span>
           </Link>
           <Link to="/admin/courses" className={isActive('/admin/courses')}>

@@ -11,6 +11,7 @@ import Courses from './pages/admin/Courses';
 import LecturersList from './lecturePage/LectureList'
 import AdminDashboard from './components/AdminDashboard'
 import BatchRegistration from './students/BatchRegistration'
+import AdminLogin from './pages/admin/AdminLogin';
 
 
 
@@ -29,7 +30,9 @@ function App() {
     <BrowserRouter>
       <Routes>
 
-        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin" element={<AdminLogin/>}/>
+
+        <Route path="/admin/Dashboard" element={<AdminDashboard />} />
         
         {/* Student profile page */}
         <Route path="/student/profile" element={<StudentProfilePage />} />
