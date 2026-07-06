@@ -27,6 +27,7 @@ function StudentProfilePage(){
     const handleLogout = () => {
         localStorage.removeItem("studentToken");
         localStorage.removeItem("studentData");
+        alert("Are you sure you want to  log out?")
         navigate("/");
     };
         

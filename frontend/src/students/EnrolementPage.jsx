@@ -34,6 +34,16 @@ function CourseRegistration (){
     const [successmsg,setSuccessmsg] = useState("");
 
     useEffect(() => {
+
+
+        const showError = (message) => {
+            if (!showErrorCard) {
+                setErrorMessage(message);
+                setshowErrorCard(true);
+            }
+        };
+
+
         const fetchEnrolledCourses = async () => {
             try {
                 const response = await axios.get(`http://localhost:5000/api/enrollments/enrolledCourses/${encodeURIComponent(stID)}`, {
@@ -44,7 +54,7 @@ function CourseRegistration (){
                 setEnrolledCourses(response.data.courses);
                 console.log(response.data);
             } catch (error) {
-                console.error('Error fetching enrolled courses:', error);
+                showError("Unable to connect to the server.");
             }
         };
         fetchEnrolledCourses();
@@ -71,6 +81,8 @@ function CourseRegistration (){
                 
             } catch (error) {
                 console.error('Error fetching courses:', error);
+                
+                
             }
         };
 
@@ -124,7 +136,6 @@ function CourseRegistration (){
         setShowSuccessCard(true);
         }catch (error) {
             console.error('Error submitting selected courses:', error);
-            alert('Error submitting selected courses:',error);
         }
     };
 
@@ -147,10 +158,19 @@ function CourseRegistration (){
                     }
                 }
             );
-            setSearchResults(response.data);
+            const { data} = response.data;
+
+            if (data.length === 0) {
+                setErrorMessage("No courses found for this code.");
+                setshowErrorCard(true);
+                return;
+            }
+            
+            setSearchResults(data);
             setShowPopup(true);
         } catch (error) {
             console.error('Error searching courses:', error);
+            
         }
     };
 
@@ -165,6 +185,7 @@ function CourseRegistration (){
                 setRegisteredCredits(response.data.totalCredits);
             } catch (error) {
                 console.error('Error fetching registered credits:', error);
+                
             }
         };
 
