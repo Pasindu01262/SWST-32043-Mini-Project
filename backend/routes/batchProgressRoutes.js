@@ -1,11 +1,12 @@
 const express = require('express');
 const BatchRouter = express.Router();
-const { Registerbatch, ShowCourse } = require('../controllers/batchProgressControll');
+const { Registerbatch, ShowCourse,getAllBatchDetails,updateBatchDetails} = require('../controllers/batchProgressControll');
 
 
 BatchRouter.post('/register', Registerbatch);
-BatchRouter.get('/batchdetails/:batch', ShowCourse)
-
+BatchRouter.get('/batchdetails/:batch', ShowCourse);
+BatchRouter.get('/getalldetails',getAllBatchDetails);
+BatchRouter.put('/updateBatch/:batch',updateBatchDetails)
 
 
 
