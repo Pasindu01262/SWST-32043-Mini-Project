@@ -49,7 +49,7 @@ function StudentProfilePage(){
                     icon={PiExamFill}
                     title="Grades"
                     buttonText="View Details"
-                    onClick={ () => console.log("Grades") }
+                    onClick={ () => navigate('/students/GradePage') }
                 />
                 <DashboardCard
                     icon={FaRegistered}

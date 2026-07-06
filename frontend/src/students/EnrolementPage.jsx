@@ -134,6 +134,7 @@ function CourseRegistration (){
             setshowErrorCard(true)
             return;
         }
+        
         try {
             const response = await axios.get(
                 `http://localhost:5000/api/courses/search`,
