@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 :root {
   --navy: #16213E;
   --navy-soft: #1F2E52;
@@ -112,4 +111,4 @@ table.results-table { width: 100%; border-collapse: collapse; font-size: 13px; }
   padding: 8px 16px; font-size: 12px; font-weight: 600; cursor: pointer; text-decoration: none;
 }
 .student-panel { background: #fff; border-radius: 14px; padding: 20px 24px; }
->>>>>>> b119e1bd25a68319f0eb407c179e59859c8da2e4
+
