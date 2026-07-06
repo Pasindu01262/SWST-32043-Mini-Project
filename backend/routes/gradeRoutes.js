@@ -9,3 +9,4 @@ const express = require('express');
    router.get('/my/:regNo', ctrl.getGradesByRegNo);
 
    module.exports = router;
+  

@@ -290,7 +290,7 @@ const Courses = () => {
                 </div>
 
             </div>
-        </AdminLayout>
+       </AdminLayout> 
     );
 };
 

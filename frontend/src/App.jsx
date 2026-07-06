@@ -1,68 +1,60 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import StudentProfilePage from './students/StudentProfilePage';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import AdminProtectedRoute from './pages/admin/AdminProtectedRoute';
+
+// Admin Imports
+import AdminLogin from './pages/admin/AdminLogin';
+import Dashboard from './pages/admin/Dashboard';
+import Courses from './pages/admin/Courses';
+import Lecturers from './pages/admin/Lecturers';
+import AddStudent from './pages/admin/AddStudent';
+import AdminResults from './pages/AdminResults';
+
+// Student Imports
 import StudentLogin from './students/StudentLogin';
+import StudentProfilePage from './students/StudentProfilePage';
 import CourseRegistration from './students/EnrolementPage';
 import EnrolledCoursesList from './students/CoursesListShowPage';
-import Lecturers from './pages/admin/Lecturers';
-import AdminLayout from './layouts/AdminLayout';
-import AddStudent from './pages/admin/AddStudent';
-import Courses from './pages/admin/Courses';
-import LecturersList from './lecturePage/LectureList'
-import AdminDashboard from './components/AdminDashboard'
-import BatchRegistration from './students/BatchRegistration'
-import AdminLogin from './pages/admin/AdminLogin';
-
-
-
+import BatchRegistration from './students/BatchRegistration';
+import LecturersList from './lecturePage/LectureList';
+import MyResults from './pages/MyResults';
 
 function App() {
-  const [message, setMessage] = useState("Loading backend status...");
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     fetch('http://localhost:5000/api/status')
       .then((res) => res.json())
       .then((data) => setMessage(data.message))
-      .catch((error) => setMessage("Backend connection failed! ❌"));
+      .catch((error) => console.log("Backend connection failed! ❌"));
   }, []);
 
   return (
     <BrowserRouter>
       <Routes>
-
-        <Route path="/admin" element={<AdminLogin/>}/>
-
-        <Route path="/admin/Dashboard" element={<AdminDashboard />} />
-        
-        {/* Student profile page */}
-        <Route path="/student/profile" element={<StudentProfilePage />} />
-
-        {/* Student login page */}
+        {/* Default Landing / Student Login Page */}
         <Route path="/" element={<StudentLogin />} />
 
-        {/* Student course registration page */}
+        {/*Admin Routes*/}
+        {/*Protected Admin Routes*/}
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/admin/dashboard" element={<AdminProtectedRoute><Dashboard /></AdminProtectedRoute>} />
+        <Route path="/admin/courses" element={<AdminProtectedRoute><Courses /></AdminProtectedRoute>} />
+        <Route path="/admin/lecturers" element={<AdminProtectedRoute><Lecturers /></AdminProtectedRoute>} />
+        <Route path="/admin/students" element={<AdminProtectedRoute><AddStudent /></AdminProtectedRoute>} />
+        <Route path="/admin/results" element={<AdminProtectedRoute><AdminResults /></AdminProtectedRoute>} />
+
+        {/*Student Routes*/}
+        <Route path="/student/profile" element={<StudentProfilePage />} />
         <Route path="/student/registration" element={<CourseRegistration />} />
-
-        {/* Student enrolled courses list page */}
         <Route path="/student/enrolled-courses" element={<EnrolledCoursesList />} />
-
-        <Route path="/admin/courses" element={<Courses />} />
-
-        {/* lecturers list page */}
-        <Route path="/admin/lecturers" element={<Lecturers />} />
-
-        <Route path="/admin/students" element={<AddStudent />} />
-
-        <Route path="/student/lecturerslist" element={<LecturersList/>}/>
-        {/* Fallback Selection Portal Landing Page */}
-
-        {/*Batch registration */}
-        
-        <Route path="/student/batchregistration" element={<BatchRegistration/>}/>
-
+        <Route path="/student/lecturerslist" element={<LecturersList />} />
+        <Route path="/student/batchregistration" element={<BatchRegistration />} />
+        <Route path="/my-results" element={<MyResults />} />
       </Routes>
     </BrowserRouter>
   );
 }
 
 export default App;
+   

@@ -1,135 +1,137 @@
 import React, { useState, useEffect } from 'react';
-import AdminLayout from '../../layouts/AdminLayout';
-import { Users, BookOpen, GraduationCap } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { LayoutDashboard, BookOpen, Users, GraduationCap, UserPlus } from 'lucide-react';
 import axios from 'axios';
-import './Dashboard.css';
+import AdminLayout from '../../layouts/AdminLayout';
 
-const Dashboard = () => {
-  const [stats, setStats] = useState({ totalStudents: 0, totalCourses: 0, totalLecturers: 0 });
-  const [students, setStudents] = useState([]);
-  const [loading, setLoading] = useState(true);
+function Dashboard() {
+  const location = useLocation();
+
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [dashboardData, setDashboardData] = useState({
+    totalStudents: 0,
+    totalCourses: 0,
+    totalLecturers: 0,
+    students: []
+  });
+
+
+  const menuItems = [
+    { name: 'Dashboard', icon: <LayoutDashboard size={20} />, path: '/admin' },
+    { name: 'Courses', icon: <BookOpen size={20} />, path: '/admin/courses' },
+    { name: 'Lecturers', icon: <Users size={20} />, path: '/admin/lecturers' },
+    { name: 'Results', icon: <GraduationCap size={20} />, path: '/admin/results' },
+    { name: 'Register Student', icon: <UserPlus size={20} />, path: '/admin/students' },
+  ];
 
   useEffect(() => {
-    fetchDashboardData();
+    fetchDashboardSummary();
   }, []);
 
-  const fetchDashboardData = async () => {
+  const fetchDashboardSummary = async () => {
     setLoading(true);
     setError(null);
     try {
-      const [statsRes, studentsRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/dashboard/stats'),
-        axios.get('http://localhost:5000/api/students'),
-      ]);
-
-      setStats(statsRes.data);
-      setStudents(studentsRes.data);
+      const response = await axios.get('http://localhost:5000/api/dashboard/summary');
+      setDashboardData(response.data);
     } catch (err) {
-      console.error('Error fetching dashboard data:', err);
-      setError('Failed to load dashboard data.');
+      setError('Failed to fetch dashboard summary');
     } finally {
       setLoading(false);
     }
   };
 
-  // enrolledCourses is an array of populated Course objects ({ courseCode, courseName })
-  const renderEnrolledCourses = (enrolledCourses) => {
-    if (!enrolledCourses || enrolledCourses.length === 0) {
-      return <span className="no-course">Not enrolled</span>;
-    }
-    return (
-      <div className="course-tags">
-        {enrolledCourses.map((course) => (
-          <span key={course._id} className="course-tag">
-            {course.courseCode}
-          </span>
-        ))}
-      </div>
-    );
-  };
-
   return (
-    <AdminLayout pageTitle="Dashboard">
-      <div className="dashboard-page-container">
+    <AdminLayout>
+    <div style={{ display: 'flex', height: '100vh', backgroundColor: '#f8fafc', color: '#1e293b', fontFamily: 'sans-serif' }}>
 
-        {/* Stat Cards */}
-        <div className="stats-row">
-          <div className="stat-card">
-            <div>
-              <p className="stat-label">Total Students</p>
-              <h2 className="stat-value">{loading ? '—' : stats.totalStudents}</h2>
-            </div>
-            <div className="stat-icon-badge students">
-              <Users size={22} />
-            </div>
-          </div>
+      {/* Main Content Area */}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
 
-          <div className="stat-card">
-            <div>
-              <p className="stat-label">Total Courses</p>
-              <h2 className="stat-value">{loading ? '—' : stats.totalCourses}</h2>
-            </div>
-            <div className="stat-icon-badge courses">
-              <BookOpen size={22} />
-            </div>
-          </div>
-
-          <div className="stat-card">
-            <div>
-              <p className="stat-label">Total Lecturers</p>
-              <h2 className="stat-value">{loading ? '—' : stats.totalLecturers}</h2>
-            </div>
-            <div className="stat-icon-badge lecturers">
-              <GraduationCap size={22} />
-            </div>
-          </div>
-        </div>
-
-        {/* Registered Students List */}
-        <div className="card-container">
-          <h3 className="card-title">Registered Students List</h3>
-
-          {loading && <div className="dashboard-status">Loading...</div>}
-          {error && <div className="dashboard-status error">{error}</div>}
+        {/* Content */}
+        <main style={{ flex: 1, padding: '40px', overflowY: 'auto' }}>
+          {loading && <div style={{ padding: '40px', textAlign: 'center', color: '#64748b' }}>Loading...</div>}
+          {error && <div style={{ padding: '20px', color: '#dc2626', backgroundColor: '#fee2e2', borderRadius: '8px', marginBottom: '20px' }}>{error}</div>}
 
           {!loading && !error && (
-            <div className="table-responsive">
-              <table className="student-table">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Enrolled Course</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {students.map((student) => (
-                    <tr key={student._id}>
-                      <td className="student-id">{student.studentId}</td>
-                      <td>{student.name}</td>
-                      <td>{student.email}</td>
-                      <td>{renderEnrolledCourses(student.enrolledCourses)}</td>
-                    </tr>
-                  ))}
+            <>
+              {/* Stat Cards */}
+              <div style={{ display: 'flex', gap: '20px', marginBottom: '24px' }}>
+                <div style={{ flex: 1, backgroundColor: 'white', borderRadius: '12px', border: '1px solid #e2e8f0', padding: '20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <div>
+                    <div style={{ color: '#64748b', fontSize: '14px', marginBottom: '8px' }}>Total Students</div>
+                    <div style={{ fontSize: '28px', fontWeight: 'bold', color: '#1e293b' }}>{dashboardData.totalStudents}</div>
+                  </div>
+                  <div style={{ backgroundColor: '#dbeafe', color: '#3b82f6', padding: '12px', borderRadius: '50%' }}>
+                    <Users size={22} />
+                  </div>
+                </div>
 
-                  {students.length === 0 && (
-                    <tr>
-                      <td colSpan="4" style={{ textAlign: 'center', color: '#64748b' }}>
-                        No students registered yet.
-                      </td>
+                <div style={{ flex: 1, backgroundColor: 'white', borderRadius: '12px', border: '1px solid #e2e8f0', padding: '20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <div>
+                    <div style={{ color: '#64748b', fontSize: '14px', marginBottom: '8px' }}>Total Courses</div>
+                    <div style={{ fontSize: '28px', fontWeight: 'bold', color: '#1e293b' }}>{dashboardData.totalCourses}</div>
+                  </div>
+                  <div style={{ backgroundColor: '#dbeafe', color: '#3b82f6', padding: '12px', borderRadius: '50%' }}>
+                    <BookOpen size={22} />
+                  </div>
+                </div>
+
+                <div style={{ flex: 1, backgroundColor: 'white', borderRadius: '12px', border: '1px solid #e2e8f0', padding: '20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <div>
+                    <div style={{ color: '#64748b', fontSize: '14px', marginBottom: '8px' }}>Total Lecturers</div>
+                    <div style={{ fontSize: '28px', fontWeight: 'bold', color: '#1e293b' }}>{dashboardData.totalLecturers}</div>
+                  </div>
+                  <div style={{ backgroundColor: '#dbeafe', color: '#3b82f6', padding: '12px', borderRadius: '50%' }}>
+                    <GraduationCap size={22} />
+                  </div>
+                </div>
+              </div>
+
+              {/* Registered Students List */}
+              <div style={{ backgroundColor: 'white', borderRadius: '12px', border: '1px solid #e2e8f0', overflow: 'hidden' }}>
+                <div style={{ padding: '24px', borderBottom: '1px solid #e2e8f0' }}>
+                  <h2 style={{ margin: '0', fontSize: '20px', fontWeight: 'bold', color: '#1e293b' }}>Registered Students List</h2>
+                </div>
+                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                  <thead>
+                    <tr style={{ backgroundColor: '#f1f5f9', borderBottom: '2px solid #e2e8f0' }}>
+                      <th style={{ padding: '16px', textAlign: 'left', fontWeight: '600', color: '#1e293b' }}>ID</th>
+                      <th style={{ padding: '16px', textAlign: 'left', fontWeight: '600', color: '#475569' }}>Name</th>
+                      <th style={{ padding: '16px', textAlign: 'left', fontWeight: '600', color: '#475569' }}>Email</th>
+                      <th style={{ padding: '16px', textAlign: 'left', fontWeight: '600', color: '#475569' }}>Enrolled Course</th>
                     </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody>
+                    {dashboardData.students.length === 0 ? (
+                      <tr>
+                        <td colSpan="4" style={{ padding: '24px', textAlign: 'center', color: '#94a3b8' }}>No students found</td>
+                      </tr>
+                    ) : (
+                      dashboardData.students.map((student) => (
+                        <tr key={student.studentId} style={{ borderBottom: '1px solid #e2e8f0' }}>
+                          <td style={{ padding: '16px', color: '#1e293b', fontWeight: '600' }}>{student.studentId}</td>
+                          <td style={{ padding: '16px', color: '#475569' }}>{student.name}</td>
+                          <td style={{ padding: '16px', color: '#475569' }}>{student.email}</td>
+                          <td style={{ padding: '16px', color: '#3b82f6' }}>
+                            {student.enrolledCourses && student.enrolledCourses.length > 0
+                              ? student.enrolledCourses.join(', ')
+                              : '—'}
+                          </td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </>
           )}
-        </div>
-
+        </main>
       </div>
+    </div>
     </AdminLayout>
   );
-};
+}
 
 export default Dashboard;

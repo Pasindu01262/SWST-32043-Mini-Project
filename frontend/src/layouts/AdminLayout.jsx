@@ -1,13 +1,29 @@
 import React from 'react';
 import { LayoutDashboard, BookOpen, GraduationCap, FileText, UserPlus } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './AdminLayout.css'; 
 
 const AdminLayout = ({ children, pageTitle }) => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const isActive = (path) => {
     return location.pathname === path ? "nav-link active" : "nav-link";
+  };
+
+
+  // Logout Function 
+  const handleLogout = () => {
+    // Confirm with the user (Safety check)
+    if (window.confirm("Are you sure you want to logout from Admin Portal?")) {
+      // Remove the saved admin details from LocalStorage
+      localStorage.removeItem('adminToken');
+      localStorage.removeItem('adminEmail');
+      localStorage.removeItem('isAdminLoggedIn');
+      localStorage.removeItem('adminInfo');
+
+      navigate('/admin');
+    }
   };
 
   return (
@@ -59,8 +75,12 @@ const AdminLayout = ({ children, pageTitle }) => {
               <p className="user-name">Admin User</p>
               <p className="user-role">Administrator</p>
             </div>
-            <div className="user-avatar">
-              AU
+           <div 
+              className="user-avatar logout-btn" 
+              onClick={handleLogout}
+              title="Click to Logout"
+            >
+              Logout
             </div>
           </div>
         </header>
