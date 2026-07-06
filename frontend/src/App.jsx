@@ -19,6 +19,9 @@ import BatchRegistration from './students/BatchRegistration';
 import LecturersList from './lecturePage/LectureList';
 import MyResults from './pages/MyResults';
 
+//student gared see
+import GradeShowPage from './students/GradePage'
+
 function App() {
   const [message, setMessage] = useState('');
 
@@ -51,6 +54,7 @@ function App() {
         <Route path="/student/lecturerslist" element={<LecturersList />} />
         <Route path="/student/batchregistration" element={<BatchRegistration />} />
         <Route path="/my-results" element={<MyResults />} />
+        <Route path="/students/GradePage" element={<GradeShowPage/>}/>
       </Routes>
     </BrowserRouter>
   );
