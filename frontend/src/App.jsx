@@ -9,13 +9,13 @@ import Courses from './pages/admin/Courses';
 import Lecturers from './pages/admin/Lecturers';
 import AddStudent from './pages/admin/AddStudent';
 import AdminResults from './pages/AdminResults';
+import BatchRegistration from './students/BatchRegistration';
 
 // Student Imports
 import StudentLogin from './students/StudentLogin';
 import StudentProfilePage from './students/StudentProfilePage';
 import CourseRegistration from './students/EnrolementPage';
 import EnrolledCoursesList from './students/CoursesListShowPage';
-import BatchRegistration from './students/BatchRegistration';
 import LecturersList from './lecturePage/LectureList';
 import MyResults from './pages/MyResults';
 
@@ -46,13 +46,13 @@ function App() {
         <Route path="/admin/lecturers" element={<AdminProtectedRoute><Lecturers /></AdminProtectedRoute>} />
         <Route path="/admin/students" element={<AdminProtectedRoute><AddStudent /></AdminProtectedRoute>} />
         <Route path="/admin/results" element={<AdminProtectedRoute><AdminResults /></AdminProtectedRoute>} />
+        <Route path="/admin/batchregistration" element={<AdminProtectedRoute><BatchRegistration /></AdminProtectedRoute>} />
 
         {/*Student Routes*/}
         <Route path="/student/profile" element={<StudentProfilePage />} />
         <Route path="/student/registration" element={<CourseRegistration />} />
         <Route path="/student/enrolled-courses" element={<EnrolledCoursesList />} />
         <Route path="/student/lecturerslist" element={<LecturersList />} />
-        <Route path="/student/batchregistration" element={<BatchRegistration />} />
         <Route path="/my-results" element={<MyResults />} />
         <Route path="/students/GradePage" element={<GradeShowPage/>}/>
       </Routes>

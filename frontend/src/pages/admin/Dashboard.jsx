@@ -43,7 +43,7 @@ function Dashboard() {
   };
 
   return (
-    <AdminLayout>
+    <AdminLayout pageTitle="Dashboard">
     <div style={{ display: 'flex', height: '100vh', backgroundColor: '#f8fafc', color: '#1e293b', fontFamily: 'sans-serif' }}>
 
       {/* Main Content Area */}

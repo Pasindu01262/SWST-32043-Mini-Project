@@ -130,7 +130,7 @@ const Courses = () => {
     
 
     return (
-        <AdminLayout pageTitle="Courses">
+        <AdminLayout pageTitle="Courses Management">
             <div className="courses-container">
 
                 
@@ -146,7 +146,7 @@ const Courses = () => {
                                 name="courseName"
                                 value={formData.courseName}
                                 onChange={handleChange}
-                                placeholder="e.x. Data Structures"
+                                placeholder="Data Structures"
                                 required
                             />
                         </div>
@@ -158,7 +158,7 @@ const Courses = () => {
                                 name="courseCode"
                                 value={formData.courseCode}
                                 onChange={handleChange}
-                                placeholder="e.x. CS201"
+                                placeholder="CS201"
                                 required
                             />
                         </div>
@@ -170,7 +170,7 @@ const Courses = () => {
                                 name="credits"
                                 value={formData.credits}
                                 onChange={handleChange}
-                                placeholder="e.x. 3"
+                                placeholder="3"
                                 min="1"
                                 required
                             />
@@ -183,7 +183,7 @@ const Courses = () => {
                                 name="level"
                                 value={formData.level}
                                 onChange={handleChange}
-                                placeholder="e.x. Level 3"
+                                placeholder="Level 3"
                                 required
                             />
                         </div>
@@ -195,7 +195,7 @@ const Courses = () => {
                                 name="academicYear"
                                 value={formData.academicYear}
                                 onChange={handleChange}
-                                placeholder="e.x. 2024/2025"
+                                placeholder="2024/2025"
                                 required
                             />
                         </div>
@@ -207,7 +207,7 @@ const Courses = () => {
                                 name="semester"
                                 value={formData.semester}
                                 onChange={handleChange}
-                                placeholder="e.x. Semester 1"
+                                placeholder="Semester 1"
                                 required
                             />
                         </div>

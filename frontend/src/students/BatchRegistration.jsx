@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PageHeader from '../components/header';
 import './BatchRegistration.css';
+import AdminLayout from '../layouts/AdminLayout';
 
 const initialFormState = {
     batch: '',
@@ -99,6 +100,7 @@ const BatchRegistration = () => {
     };
 
     return (
+        <AdminLayout pageTitle="Batch Registration">
         <div className="batch-container">
             
             <div className="batch-box">
@@ -116,7 +118,7 @@ const BatchRegistration = () => {
                             value={formData.batch}
                             onChange={handleChange}
                             required
-                            placeholder="e.g. 2023"
+                            placeholder="2023"
                             disabled={editingBatch !== null} // batch is the lookup key, don't let it change mid-edit
                         />
                     </div>
@@ -129,7 +131,7 @@ const BatchRegistration = () => {
                             value={formData.academicYear}
                             onChange={handleChange}
                             required
-                            placeholder="e.g. 2025/2026"
+                            placeholder="2025/2026"
                         />
                     </div>
 
@@ -142,7 +144,7 @@ const BatchRegistration = () => {
                                 value={formData.currentYearLevel}
                                 onChange={handleChange}
                                 required
-                                placeholder="e.g. Year 2"
+                                placeholder="Year 2"
                             />
                         </div>
 
@@ -154,7 +156,7 @@ const BatchRegistration = () => {
                                 value={formData.currentSemester}
                                 onChange={handleChange}
                                 required
-                                placeholder="e.g. Semester 1"
+                                placeholder="Semester 1"
                             />
                         </div>
                     </div>
@@ -245,6 +247,7 @@ const BatchRegistration = () => {
                 )}
             </div>
         </div>
+        </AdminLayout>
     );
 };
 

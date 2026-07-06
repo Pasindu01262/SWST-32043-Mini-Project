@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayoutDashboard, BookOpen, GraduationCap, FileText, UserPlus } from 'lucide-react';
+import { LayoutDashboard, BookOpen, GraduationCap, FileText, UserPlus, Layers } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './AdminLayout.css'; 
 
@@ -56,6 +56,9 @@ const AdminLayout = ({ children, pageTitle }) => {
           </Link>
           <Link to="/admin/students" className={isActive('/admin/register-student')}>
             <UserPlus size={20} /> <span>Register Student</span>
+          </Link>
+          <Link to="/admin/batchregistration" className={isActive('/admin/batchregistration')}>
+            <Layers size={20} /> <span>Register Batch</span>
           </Link>
         </nav>
 
