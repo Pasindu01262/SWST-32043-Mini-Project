@@ -16,12 +16,14 @@ connectDB();
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use('/api/grades', require('./routes/gradeRoutes'));
 
 app.use('/api/lecturers', lecturerRoutes);
 app.use('/api/students', studentRoutes);
 app.use('/api/enrollments', EnrollmentRouter);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/admin', adminRoutes);
+
 
 app.get('/api/status', (req, res) => {
   res.json({ message: "Backend and MongoDB are fully connected! " });
