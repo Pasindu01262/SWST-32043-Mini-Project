@@ -98,16 +98,23 @@ const getCourseById = async (req, res) => {
 // Search courses by course code
 const searchCourses = async (req, res) => {
     try {
-        const courseCode = req.query.courseCode;
+        const courseCode = req.query.courseCode || "";
 
         const courses = await Course.find({ 
             courseCode: { $regex: courseCode, $options: 'i' }
         }).sort({ createdAt: -1 });
 
-        res.status(200).json(courses);
+        res.status(200).json({
+            success: true,
+            message: courses.length === 0 ? 'No courses found' : 'Courses retrieved successfully',
+            data: courses
+        });
 
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ 
+            success: false,
+            message: error.message
+        });
     }
 }
 
