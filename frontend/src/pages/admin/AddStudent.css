@@ -1,0 +1,52 @@
+.add-student-container {
+    padding: 20px;
+    font-size:25px;
+}
+
+.message {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.message.success {
+    color: rgb(42, 169, 86);
+}
+
+.message.error {
+    color: red;
+}
+
+.student-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.form-group label {
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.submit-btn {
+    padding: 10px;
+    background-color: #142243;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.submit-btn:hover {
+    background-color: #0f172a;
+}

@@ -1,0 +1,32 @@
+.container {
+  min-height: 100vh;
+  background-color: #f4f7fb;
+  padding: 28px 40px 60px;
+  box-sizing: border-box;
+}
+
+.dashboard_cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  margin-top: 36px;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px 24px 40px;
+  }
+
+  .dashboard_cards {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 18px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .dashboard_cards {
+    grid-template-columns: 1fr;
+  }
+}
